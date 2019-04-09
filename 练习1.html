@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 第一部分 -->
+        <fieldset>
+            <legend>学生录入系统</legend>
+            <div>
+                <span>姓名</span>
+                <input type="name" placeholder="请输入姓名" v-model="newstudent.name">
+            </div>
+            <div>
+                <span>年龄</span>
+                <input type="text" placeholder="请输入年龄" v-model="newstudent.age">
+            </div>
+            <div>
+                <span>性别</span>
+                <select v-model="newstudent.sex">
+                    <option>男</option>
+                    <option>女</option>
+                </select>
+            </div>
+            <div>
+                <span>电话</span>
+                <input type="text" placeholder="请输入电话" v-model="newstudent.phone">
+            </div>
+            <button @click="addstudent">创建新用户</button>
+        </fieldset>
+        <!-- 第二部分 -->
+        <table>
+            <thead>
+                <tr>
+                    <td>姓名</td>
+                    <td>年龄</td>
+                    <td>性别</td>
+                    <td>电话</td>
+                    <td>删除</td>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr v-for="(p,index) in persons">
+                    <td>{{p.name}}</td>
+                    <td>{{p.age}}</td>
+                    <td>{{p.sex}}</td>
+                    <td>{{p.phone}}</td>
+                    <td><button @click="deletestudent(index)">删除</button></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <style>
+        #app{
+            margin: 50px auto;
+            width: 600px;
+        }
+        fieldset{
+            border: 1px solid orangered;
+            margin-bottom: 30px;
+        }
+        fieldset input{
+            width: 200px;
+            height: 30px;
+            margin: 10px 0;
+        }
+        table{
+            width: 600px;
+            margin: 0 auto;
+            border: 1px solid orangered;
+        }
+        table thead{
+            background-color: orangered;
+        }
+        button{
+            outline: none;
+            background-color: orangered;
+            border: 1px solid rgb(85, 59, 50);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    persons: [
+                        { name: "李能", age: 25, sex: "男", phone: "17760479631" },
+                        { name: "李li", age: 65, sex: "男", phone: "15295643852" },
+                        { name: "李打", age: 25, sex: "男", phone: "13345679512" },
+                        { name: "李的", age: 15, sex: "男", phone: "15082649610" },
+                    ],
+                    newstudent:{
+                        name:"", age: 0, sex:"女", phone:""
+                    }
+                }
+            },
+            //适合做大的计算，会从新缓存
+            methods: {
+                addstudent:function(){
+                    var a = this.persons;
+                    var b = this.newstudent;
+                    a.push(b)
+                },
+                deletestudent:function (index) {
+                    var a = this.persons;
+                    a.splice(index,1)
+                }
+            },
+            //不会从新缓存
+            computed: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

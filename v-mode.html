@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            .actiyity{
+                background-color: red;
+            }
+    </style>
+</head>
+<body>
+        <div id="app">
+                <p v-once>原始值：{{mmessage}}</p>
+                <p>后面的值：{{mmessage}}</p>
+                <input type="text" v-model="mmessage">
+                <p v-if="show">显示出来</p>
+                <p v-if="hider">不显示出来</p>
+        
+                <p v-show="show">show显示出来</p>
+                <p v-show="hider">show不显示出来</p>
+        
+                <p v-if="isdad>4">v-if</p>
+                <p v-else>v-else</p>
+        
+                <p>输入的成绩等级是：</p>
+                <p v-if="score>=90">优秀</p>
+                <p v-else-if="score>=80">良好</p>
+                <p v-else-if="score>=60">及格</p>
+                <p v-else>不及格</p>
+                <input type="text" v-model="score">
+                
+                <ul>
+                    <li v-for="(msg,index) in msg">{{index+ ':' + msg}}  {{index}} + {{msg}}</li>
+                </ul>
+                <ul>
+                    <li v-for="dg in dog">{{dg}}</li>
+                </ul>
+                <table>
+                    <tr>
+                        <td>姓名</td>
+                        <td>年龄</td>
+                        <td>性别</td>
+                    </tr>
+                    <tr v-for = "people in people">
+                        <td>{{people.name}}</td>
+                        <td>{{people.age}}</td>
+                        <td>{{people.sex}}</td>
+                    </tr>
+                </table>
+                <ul>
+                    <li v-for="(col,index) in cologe" :class="index === acindex? 'actiyity':''">{{col}}</li>
+                </ul>
+
+                <p :style="{color:baccolor}">{{data1}}</p>
+                <button @click="change">改变内容</button>
+                <p @mouseover="mouseover">{{data1}}</p>
+    
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+            <script>
+                let vm = new Vue({
+                    el:'#app',
+                    data () {
+                        return {
+                            mmessage:"helloworld",
+                            msg:[1,2,3,4,5,6,7,8,9],
+                            dog:["李能","男","25"],
+                            people:[{name:"张三",age:25,sex:"男"},
+                                    {name:"李四",age:15,sex:"男"},
+                                    {name:"张美",age:20,sex:"女"}],
+                                    cologe:[
+                                        "数学",
+                                        "语文",
+                                        "英语",
+                                        "生物",
+                                        "化学"
+                                    ],
+                                    acindex:2,
+                            show:true,
+                            hider:false,
+                            isdad:5,
+                            score:90,
+                            baccolor:"red",
+                            data1:"今天很美"
+        
+                        }
+                    },
+                    methods:{
+                        change:function(){
+                            this.data1="昨天也很美啊，明天会更美"
+                        },
+                        mouseover:function(){
+                            this.data1="123112312"
+                        }
+                    },
+                    computed:{
+                          
+                    }
+                })
+            </script>
+</body>
+</html>
+
+
+
